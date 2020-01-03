@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -57,6 +58,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQO-gh-j3h" userLabel="Label">
+                                <rect key="frame" x="187.5" y="626" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -68,10 +75,13 @@
                             <constraint firstItem="4aW-Ea-cw1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="brk-mt-hPV"/>
                             <constraint firstItem="2br-px-2ji" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="178" id="esw-zm-alJ"/>
                             <constraint firstItem="4aW-Ea-cw1" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" constant="-20" id="h9g-Of-MZl"/>
+                            <constraint firstItem="oQO-gh-j3h" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="myn-hv-KBE"/>
                             <constraint firstItem="2br-px-2ji" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pLI-Rb-ajM"/>
+                            <constraint firstAttribute="bottom" secondItem="oQO-gh-j3h" secondAttribute="bottom" constant="41" id="tO1-ys-Kkw"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="label" destination="oQO-gh-j3h" id="xNh-ZH-Gxs"/>
                         <outlet property="startTaskButton" destination="2br-px-2ji" id="5L6-av-pCf"/>
                         <outlet property="stopTaskButton" destination="4aW-Ea-cw1" id="reR-FP-Z2z"/>
                     </connections>
