@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Testing View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="TestingViewController" customModule="KeepAlive" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4aW-Ea-cw1">
+                                <rect key="frame" x="10" y="268" width="355" height="55"/>
+                                <color key="backgroundColor" red="0.72445598821989532" green="0.25337185462009687" blue="0.21619984942844159" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="437-4Z-hPt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Stop Background Task">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopBackgroundTask:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jfj-fz-q0N"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2br-px-2ji" userLabel="Start Task Button">
+                                <rect key="frame" x="10" y="178" width="355" height="55"/>
+                                <color key="backgroundColor" red="0.3488469713279389" green="0.72445598821989532" blue="0.061411978936363527" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="H93-qm-XlA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Start Background Task">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="startBackgroundTask:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U0m-yd-pZR"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Icon-1024.png" translatesAutoresizingMaskIntoConstraints="NO" id="g3m-U3-6AE">
+                                <rect key="frame" x="67" y="42" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvt-gS-tRA">
+                                <rect key="frame" x="20" y="361" width="335" height="183"/>
+                                <string key="text">Hi there.  You are probably wondering what this app is doing on your device.  This app is responsible for ensuring you receive alert notifications like Code Blues as quickly as possible.  Yeah, it uses up a little bit of your battery (~5% per shift) but it is vital for providing the best patient care in these times where response time is most important.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="4aW-Ea-cw1" firstAttribute="top" secondItem="2br-px-2ji" secondAttribute="bottom" constant="35" id="0rn-5I-NOJ"/>
+                            <constraint firstItem="gvt-gS-tRA" firstAttribute="top" secondItem="4aW-Ea-cw1" secondAttribute="bottom" constant="38" id="M3z-fU-iHm"/>
+                            <constraint firstItem="2br-px-2ji" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" constant="-20" id="UnH-yk-Cfx"/>
+                            <constraint firstItem="gvt-gS-tRA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="WU8-Ua-lUf"/>
+                            <constraint firstAttribute="trailing" secondItem="gvt-gS-tRA" secondAttribute="trailing" constant="20" symbolic="YES" id="Zhx-5g-bCe"/>
+                            <constraint firstItem="4aW-Ea-cw1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="brk-mt-hPV"/>
+                            <constraint firstItem="2br-px-2ji" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="178" id="esw-zm-alJ"/>
+                            <constraint firstItem="4aW-Ea-cw1" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" constant="-20" id="h9g-Of-MZl"/>
+                            <constraint firstItem="2br-px-2ji" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pLI-Rb-ajM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="startTaskButton" destination="2br-px-2ji" id="5L6-av-pCf"/>
+                        <outlet property="stopTaskButton" destination="4aW-Ea-cw1" id="reR-FP-Z2z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="547" y="498"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Icon-1024.png" width="1024" height="1024"/>
+    </resources>
+</document>
