@@ -31,6 +31,7 @@ class TestingViewController: UIViewController {
 
     private func sharedInit() {
         NotificationCenter.default.addObserver(forName: .BackgroundTaskDidStart, object: nil, queue: nil) { [unowned self] _ in
+            self.timer.invalidate()
             self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
             self.startTaskButton.alpha = 0.5
             self.startTaskButton.isEnabled = false

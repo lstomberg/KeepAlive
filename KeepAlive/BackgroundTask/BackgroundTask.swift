@@ -52,6 +52,12 @@ public class BackgroundTask {
                                                selector: #selector(handleInterruption),
                                                name: AVAudioSession.interruptionNotification,
                                                object:nil)
+
+       // => App resigning active
+       NotificationCenter.default.addObserver(self,
+                                              selector: #selector(willResignActive),
+                                              name: UIApplication.willResignActiveNotification,
+                                              object: nil)
     }
 
     //
@@ -75,6 +81,13 @@ public class BackgroundTask {
                 break
         }
     }
+
+    @objc
+    private func willResignActive() {
+        // call on every resignActive.  Why?  I don't know.  But it might fix some issues we were seeing.
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+    }
+
 }
 
 //
@@ -86,14 +99,12 @@ extension BackgroundTask {
     public func start() {
         try? avSession.setActive(true)
         audioPlayer.play()
-        UIApplication.shared.beginReceivingRemoteControlEvents()
         NotificationCenter.default.post(name: .BackgroundTaskDidStart, object: nil)
     }
 
     public func stop() {
         audioPlayer.stop()
         try? avSession.setActive(false)
-        UIApplication.shared.endReceivingRemoteControlEvents()
         NotificationCenter.default.post(name: .BackgroundTaskDidEnd, object: nil)
     }
 
