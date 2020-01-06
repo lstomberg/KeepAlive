@@ -8,6 +8,7 @@
 
 import AVFoundation
 import UIKit
+import MediaPlayer
 
 
 private func audioPlayer(withFileNamed filename: String, extension ext: String) -> AVAudioPlayer {
@@ -33,17 +34,18 @@ public class BackgroundTask {
     // MARK: variables
     //
 
-    public static let shared: BackgroundTask = BackgroundTask()
-    private var audioPlayer: AVAudioPlayer = newSilentAudioPlayer()
-    private let avSession: AVAudioSession = AVAudioSession.sharedInstance()
+    public static let shared = BackgroundTask()
+    private var audioPlayer = newSilentAudioPlayer()
+    private let avSession = AVAudioSession.sharedInstance()
     private var backgroundTask: UIBackgroundTaskIdentifier = .invalid {
         didSet { UIApplication.shared.endBackgroundTask(oldValue) }
     }
+    private let remoteCommandCenter = MPRemoteCommandCenter.shared()
 
     // debug timer
-    var timer: Timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-        print(UIApplication.shared.backgroundTimeRemaining)
-    }
+//    var timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+//        print(UIApplication.shared.backgroundTimeRemaining)
+//    }
 
     //
     // MARK: Init
@@ -52,7 +54,7 @@ public class BackgroundTask {
     init() {
 
         // configure audio session
-        let options: AVAudioSession.CategoryOptions = [.mixWithOthers, .allowBluetooth, .allowAirPlay]
+        let options: AVAudioSession.CategoryOptions = [.mixWithOthers, .allowAirPlay, .allowBluetooth]
         try? avSession.setCategory(.playback, options: options)
 
         // configure notifications
@@ -92,19 +94,43 @@ public class BackgroundTask {
 
     @objc
     private func willResignActive() {
+        enableRemoteCommands()
+    }
+
+    private func enableRemoteCommands() {
         UIApplication.shared.beginReceivingRemoteControlEvents()
+    }
+
+    private func updateNowPlaying() {
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
+        var nowPlayingInfo = [String: Any]()
+        let image = UIImage()
+        let artwork = MPMediaItemArtwork(boundsSize: image.size, requestHandler: {  (_) -> UIImage in
+            return image
+        })
+
+        nowPlayingInfo[MPMediaItemPropertyTitle] = "KeepAlive"
+        nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = "Unknown"
+        nowPlayingInfo[MPMediaItemPropertyArtwork] = artwork
+        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = 1000.00
+
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
 
     private func startBackgroundTask() {
         // active = true ensures we get interrupted and can play audio if necessary to stay alive
         try? self.avSession.setActive(true)
+        self.enableRemoteCommands()
+        self.updateNowPlaying()
+        self.audioPlayer.play()
         backgroundTask = UIApplication.shared.beginBackgroundTask { [unowned self] in
-            // force reset backgroundTimeRemaining
-            self.audioPlayer.play()
+            print("Background task expiring")
+            self.startBackgroundTask()
         }
     }
 
 }
+
 
 //
 // MARK: Public APIs
@@ -118,7 +144,7 @@ extension BackgroundTask {
     }
 
     public func stop() {
-        try? self.avSession.setActive(false)
+//        try? self.avSession.setActive(false)
         NotificationCenter.default.post(name: .BackgroundTaskDidEnd, object: nil)
     }
 
