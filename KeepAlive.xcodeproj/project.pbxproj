@@ -11,7 +11,6 @@
 		495BA55623BBD44A00BF5C33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49B842DE23BBCC7A00F82D14 /* Assets.xcassets */; };
 		495BA55A23BBD59D00BF5C33 /* Icon-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 495BA55923BBD59D00BF5C33 /* Icon-1024.png */; };
 		49B842E523BBCC7A00F82D14 /* blank.wav in Resources */ = {isa = PBXBuildFile; fileRef = 49B842D723BBCC7A00F82D14 /* blank.wav */; };
-		49B842E623BBCC7A00F82D14 /* audible.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 49B842D823BBCC7A00F82D14 /* audible.mp3 */; };
 		49B842E723BBCC7A00F82D14 /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B842DA23BBCC7A00F82D14 /* TestingViewController.swift */; };
 		49B842E823BBCC7A00F82D14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B842DB23BBCC7A00F82D14 /* AppDelegate.swift */; };
 		49B842EC23BBCC7A00F82D14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49B842E023BBCC7A00F82D14 /* LaunchScreen.storyboard */; };
@@ -24,7 +23,6 @@
 		495BA55423BBD43400BF5C33 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		495BA55923BBD59D00BF5C33 /* Icon-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-1024.png"; sourceTree = "<group>"; };
 		49B842D723BBCC7A00F82D14 /* blank.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blank.wav; sourceTree = "<group>"; };
-		49B842D823BBCC7A00F82D14 /* audible.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = audible.mp3; sourceTree = "<group>"; };
 		49B842DA23BBCC7A00F82D14 /* TestingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingViewController.swift; sourceTree = "<group>"; };
 		49B842DB23BBCC7A00F82D14 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49B842DE23BBCC7A00F82D14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,7 +59,6 @@
 			children = (
 				49B842E323BBCC7A00F82D14 /* README.md */,
 				49B842D723BBCC7A00F82D14 /* blank.wav */,
-				49B842D823BBCC7A00F82D14 /* audible.mp3 */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -194,7 +191,6 @@
 				49B842ED23BBCC7A00F82D14 /* Main.storyboard in Resources */,
 				49B842EC23BBCC7A00F82D14 /* LaunchScreen.storyboard in Resources */,
 				495BA55623BBD44A00BF5C33 /* Assets.xcassets in Resources */,
-				49B842E623BBCC7A00F82D14 /* audible.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

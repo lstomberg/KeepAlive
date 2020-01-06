@@ -12,9 +12,8 @@ import UIKit
 
 private func audioPlayer(withFileNamed filename: String, extension ext: String) -> AVAudioPlayer {
     let bundle = Bundle.main.path(forResource: filename, ofType: ext)
-    let alertSound = URL(fileURLWithPath: bundle!)
-    let player = try! AVAudioPlayer(contentsOf: alertSound)
-    player.numberOfLoops = -1
+    let fileURL = URL(fileURLWithPath: bundle!)
+    let player = try! AVAudioPlayer(contentsOf: fileURL)
     return player
 }
 
@@ -37,14 +36,23 @@ public class BackgroundTask {
     public static let shared: BackgroundTask = BackgroundTask()
     private var audioPlayer: AVAudioPlayer = newSilentAudioPlayer()
     private let avSession: AVAudioSession = AVAudioSession.sharedInstance()
+    private var backgroundTask: UIBackgroundTaskIdentifier = .invalid {
+        didSet { UIApplication.shared.endBackgroundTask(oldValue) }
+    }
+
+    // debug timer
+    var timer: Timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+        print(UIApplication.shared.backgroundTimeRemaining)
+    }
 
     //
     // MARK: Init
     //
 
     init() {
+
         // configure audio session
-        let options: AVAudioSession.CategoryOptions = [.defaultToSpeaker, .interruptSpokenAudioAndMixWithOthers, .allowBluetooth, .allowAirPlay]
+        let options: AVAudioSession.CategoryOptions = [.mixWithOthers, .allowBluetooth, .allowAirPlay]
         try? avSession.setCategory(.playback, options: options)
 
         // configure notifications
@@ -73,19 +81,27 @@ public class BackgroundTask {
         }
 
         switch type {
-            case .ended:
-                start()
-                break
-
-            default:
-                break
+        case .began:
+            backgroundTask = .invalid
+        case .ended:
+            startBackgroundTask()
+        @unknown default:
+            fatalError()
         }
     }
 
     @objc
     private func willResignActive() {
-        // call on every resignActive.  Why?  I don't know.  But it might fix some issues we were seeing.
         UIApplication.shared.beginReceivingRemoteControlEvents()
+    }
+
+    private func startBackgroundTask() {
+        // active = true ensures we get interrupted and can play audio if necessary to stay alive
+        try? self.avSession.setActive(true)
+        backgroundTask = UIApplication.shared.beginBackgroundTask { [unowned self] in
+            // force reset backgroundTimeRemaining
+            self.audioPlayer.play()
+        }
     }
 
 }
@@ -97,14 +113,12 @@ public class BackgroundTask {
 extension BackgroundTask {
 
     public func start() {
-        try? avSession.setActive(true)
-        audioPlayer.play()
+        startBackgroundTask()
         NotificationCenter.default.post(name: .BackgroundTaskDidStart, object: nil)
     }
 
     public func stop() {
-        audioPlayer.stop()
-        try? avSession.setActive(false)
+        try? self.avSession.setActive(false)
         NotificationCenter.default.post(name: .BackgroundTaskDidEnd, object: nil)
     }
 

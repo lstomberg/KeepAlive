@@ -62,7 +62,6 @@ class TestingViewController: UIViewController {
         let seconds = components.second
         
         label.text = "\(hour ?? 0):\(minutes ?? 0):\(seconds ?? 0)"
-        print("Task is Running...")
     }
     
     @IBAction
